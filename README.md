@@ -16,29 +16,28 @@ Build the project
 ```
 ## Try playing games
 
-First go to the desktop folder:
-
-```bash
-  cd desktop
-```
-
-Then run the game of your choise by passing the path to the game.
+Run the game of your choise by passing the path to the game.
 Optionally you can pass the speed of the game (ticks per frame) as a second argument.
-
-```bash
-cargo run ../games/{game_file} <optional speed modifier>10
-```
 
 Example playing snek game with default speed
 
 ```bash
-cargo run ../games/snek.ch8
+make run-game game=snek.ch8
 ```
+or
+```bash
+cargo run --manifest-path ./desktop/Cargo.toml ./games/snek.ch8
+```
+
 
 Example playing snek game with custom speed
 
 ```bash
-cargo run ../games/snek.ch8 20
+make run-game game=snek.ch8 speed=20
+```
+or
+```bash
+cargo run --manifest-path ./desktop/Cargo.toml ./games/snek.ch8 20
 ```
 
 

@@ -1,12 +1,9 @@
 build:
-				cd desktop && \
-				cargo build && \
-				cd ..
+		cargo build --manifest-path ./desktop/Cargo.toml
 
 build-release:
-				cd chip8_core && \
-				cargo build --release && \
-				cd .. && \
-				cd desktop && \
-				cargo build --release && \
-				cd ..
+		cargo build --manifest-path ./desktop/Cargo.toml && \
+		cargo build --manifest-path ./chip8_core/Cargo.toml
+
+run-game:
+		cargo run --manifest-path ./desktop/Cargo.toml ./games/${game} $(speed)
