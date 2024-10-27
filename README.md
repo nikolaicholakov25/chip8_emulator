@@ -16,26 +16,26 @@ Build the project
 ```
 ## Try playing games
 
-First step go to the desktop folder:
+First go to the desktop folder:
 
 ```bash
   cd desktop
 ```
 
-Run a game of your choosing by passing the path to the game.
+Then run the game of your choise by passing the path to the game.
 Optionally you can pass the speed of the game (ticks per frame) as a second argument.
 
 ```bash
 cargo run ../games/{game_file} <optional speed modifier>10
 ```
 
-Example with default speed
+Example playing snek game with default speed
 
 ```bash
 cargo run ../games/snek.ch8
 ```
 
-Example with custom speed
+Example playing snek game with custom speed
 
 ```bash
 cargo run ../games/snek.ch8 20
