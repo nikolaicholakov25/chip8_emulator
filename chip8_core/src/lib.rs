@@ -1,4 +1,5 @@
 use rand::Rng;
+use std::io::BufReader;
 
 const RAM_SIZE: usize = 4096; // 4KB
 const NUM_REGISTERS: usize = 16;
@@ -430,11 +431,32 @@ impl Emulator {
 
         if self.sound_timer > 0 {
             if self.sound_timer == 1 {
-                // beep sound
+                self.beep();
             }
             self.sound_timer -=1;
         }
 
+    }
+
+    fn beep(&mut self) {
+        let (_stream, handle) = rodio::OutputStream::try_default().unwrap();
+        let sink = rodio::Sink::try_new(&handle).unwrap();
+
+        let current_dir =  std::env::current_dir().unwrap();
+        let sound_relative_path = String::from("chip8_core/sounds/beep.wav");
+        let sound_absoulte_path = format!("{}/{sound_relative_path}",current_dir.display());
+
+        let file = match std::fs::File::open(sound_absoulte_path.to_string()) {
+            Ok(file) => file,
+            Err(_) => {
+                println!("Unexpected Error opening the sound file");
+                return;
+            }
+        };
+
+        sink.append(rodio::Decoder::new(BufReader::new(file)).unwrap());
+        sink.set_speed(8.0);
+        sink.sleep_until_end();
     }
 
     fn fetch(&mut self) -> u16 {
